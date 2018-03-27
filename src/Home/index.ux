@@ -1,0 +1,90 @@
+<import name="meizi" src="../Meizi/index"></import>
+<import name="other" src="../other/index"></import>
+
+<template>
+  <div id="home">
+    <div class="flexible-tabs">
+      <tabs onchange="changeTabactive" index="{{currentIndex}}">
+        <tab-content class="flexible-tab-content">
+          <div class="tab-content-section">
+            <meizi></meizi>
+          </div>
+          <div class="tab-content-section">
+            <other></other>
+          </div>
+          <div class="tab-content-section">
+            <text>content3</text>
+          </div>
+        </tab-content>
+      </tabs>
+      <div class="flexible-tabbar">
+        <div class="tab-item" for="{{tabList}}" @click="clickTabBar($idx)">
+          <text class="{{currentIndex === $idx ? 'active' : 'tab-text'}}">{{$item.name}}</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style lang="less" scoped>
+#home {
+  font-size: 16px;
+  .flexible-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .flexible-tabbar {
+    display: flex;
+    border-top-width: 1px;
+    border-top-color: #eeeeee;
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      font-size: 12px;
+      // height: 80px;
+      align-items: center;
+      flex: 1;
+    }
+    .tab-text {
+      color: #aaaaaa;
+      font-size: 24px;
+    }
+    .active {
+      font-size: 24px;
+      color: #24b9ff;
+    }
+  }
+}
+</style>
+<script>
+export default {
+  data: {
+    currentIndex: 1,
+    tabList: [
+      {
+        name: '妹子',
+        icon: ''
+      },
+      {
+        name: '其他',
+        icon: ''
+      },
+      {
+        name: 'Me',
+        icon: ''
+      }
+    ]
+  },
+  changeTabactive(evt) {
+    this.currentIndex = evt.index
+  },
+  clickTabBar(index) {
+    this.currentIndex = index
+  }
+}
+</script>
+
+
+
+
+

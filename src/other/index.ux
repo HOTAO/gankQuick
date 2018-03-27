@@ -1,0 +1,71 @@
+<template>
+  <div id="other">
+    <div class="type-list">
+      <block for="{{typeList}}">
+        <text class="type-item">{{$item.name}}</text>
+      </block>
+    </div>
+  </div>
+</template>
+<style lang="less" scoped>
+#other {
+  font-size: 16px;
+  .type-list {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-style: solid;
+    border-color: #000000;
+    border-bottom-width: 1px;
+    height: 400px;
+  }
+  .type-item {
+    font-size: 24px;
+    width: 130px;
+    height: 130px;
+    margin: 20px;
+    border-radius: 65px;
+    text-align: center;
+    background-color: #f55555;
+  }
+}
+</style>
+
+<script>
+export default {
+  data: {
+    typeList: [
+      {
+        name: 'Android',
+        icon: ''
+      },
+      {
+        name: 'iOS',
+        icon: ''
+      },
+      {
+        name: '前端',
+        icon: ''
+      },
+      {
+        name: 'App',
+        icon: ''
+      },
+      {
+        name: '休息视频',
+        icon: ''
+      },
+      {
+        name: '瞎推荐',
+        icon: ''
+      },
+      {
+        name: '拓展资源',
+        icon: ''
+      }
+    ]
+  }
+}
+</script>
+

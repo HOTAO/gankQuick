@@ -1,0 +1,29 @@
+<script>
+/**
+ * 应用级别的配置，供所有页面公用
+ */
+import util from './util'
+import fetch from '@system.fetch'
+import router from '@system.router'
+import prompt from '@system.prompt'
+export default {
+  fetch,
+  router,
+  prompt,
+  showMenu: util.showMenu,
+  createShortcut: util.createShortcut,
+  onCreate() {
+    console.info('Application onCreate')
+  },
+  onDestroy() {
+    console.info('Application onDestroy')
+  },
+  userName: {
+    name: 'HT......'
+  },
+  getUserName() {
+    console.log(this.manifest.name)
+    console.log(this.userName.name)
+  }
+}
+</script>
