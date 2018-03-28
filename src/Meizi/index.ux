@@ -1,16 +1,18 @@
 <template>
   <div id="Meizi">
-    <list class="list" @scrollbottom="loadMore">
-      <block for="{{meiziInfo.list}}">
-        <list-item type="imgItem" class="img-item">
-          <image @click="shouModel($item.url)" class="img" src="{{$item.url}}" />
+    <refresh @refresh="refreshList" refreshing="{{isRefreshing}}">
+      <list class="list" @scrollbottom="loadMore">
+        <block for="{{meiziInfo.list}}">
+          <list-item type="imgItem" class="img-item">
+            <image @click="shouModel($item.url)" class="img" src="{{$item.url}}" />
+          </list-item>
+        </block>
+        <list-item type="loadMore" class="load-more">
+          <progress type="circular"></progress>
+          <text>{{meiziInfo.hasMore?'加载更多':'已经没有更多妹子啦~'}}</text>
         </list-item>
-      </block>
-      <list-item type="loadMore" class="load-more">
-        <progress type="circular"></progress>
-        <text>{{meiziInfo.hasMore?'加载更多':'已经没有更多妹子啦~'}}</text>
-      </list-item>
-    </list>
+      </list>
+    </refresh>
     <stack show="{{model.show}}" class="mask" @click="closeModel">
       <image class="big-img" src="{{model.url}}" />
     </stack>
@@ -53,6 +55,7 @@ export default {
   data: {
     pageSize: 10,
     page: 1,
+    isRefreshing: false,
     // 妹子列表
     meiziInfo: {
       list: [],
@@ -64,10 +67,21 @@ export default {
       url: ''
     }
   },
+  refreshList(evt) {
+    this.isRefreshing = evt.refreshing
+    console.log('下拉刷新')
+    this.getMeiziList()
+  },
   getMeiziList() {
     this.$app.$def.fetch.fetch({
       url: `http://gank.io/api/data/福利/${this.pageSize}/${this.page}`,
       success: data => {
+        if (this.isRefreshing) {
+          this.$app.$def.prompt.showToast({
+            message: '刷新成功'
+          })
+          this.isRefreshing = false
+        }
         const results = JSON.parse(data.data).results
         if (results.length <= 0) {
           this.meiziInfo.hasMore = false

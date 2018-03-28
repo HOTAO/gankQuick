@@ -9,18 +9,20 @@
       </block>
     </div>
     <div class="content-list">
-      <list class="list">
-        <block for="{{contentInfo.list}}">
-          <list-item type="contentItem" class="content-item" @click="goWebView($item)">
-            <image class="item-img" src="../Common/meizi.jpeg" if="{{!$item.images}}" />
-            <image class="item-img" src="{{$item.images[0]}}" else/>
-            <div class="item-row ">
-              <text class="item-title ">{{$item.desc}}</text>
-              <text class="item-info ">类型：{{$item.type}} 作者：{{$item.who}}</text>
-            </div>
-          </list-item>
-        </block>
-      </list>
+      <refresh @refresh="refreshList" refreshing="{{isRefreshing}}">
+        <list class="list">
+          <block for="{{contentInfo.list}}">
+            <list-item type="contentItem" class="content-item" @click="goWebView($item)">
+              <image class="item-img" src="../Common/meizi.jpeg" if="{{!$item.images}}" />
+              <image class="item-img" src="{{$item.images[0]}}" else/>
+              <div class="item-row ">
+                <text class="item-title ">{{$item.desc}}</text>
+                <text class="item-info ">类型：{{$item.type}} 作者：{{$item.who}}</text>
+              </div>
+            </list-item>
+          </block>
+        </list>
+      </refresh>
     </div>
   </div>
 </template>
@@ -38,7 +40,7 @@
     border-style: solid;
     border-color: #000000;
     border-bottom-width: 1px;
-    height: 500px;
+    height: 400px;
   }
   .type-item {
     flex-direction: column;
@@ -140,11 +142,16 @@ export default {
     },
     type: 'all',
     pageSize: 10,
-    page: 1
+    page: 1,
+    isRefreshing: false
   },
   onInit() {
     this.getList()
     this.$page.setTitleBar({ text: '其他' })
+  },
+  refreshList(evt) {
+    this.isRefreshing = evt.refreshing
+    this.getList()
   },
   getListByType(name) {
     console.log(name)
@@ -156,6 +163,12 @@ export default {
     this.$app.$def.fetch.fetch({
       url: `http://gank.io/api/data/${this.type}/${this.pageSize}/${this.page}`,
       success: data => {
+        if (this.isRefreshing) {
+          this.$app.$def.prompt.showToast({
+            message: '刷新成功'
+          })
+          this.isRefreshing = false
+        }
         const results = JSON.parse(data.data).results
         if (results.length <= 0) {
           this.contentInfo.hasMore = false
