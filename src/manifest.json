@@ -10,7 +10,8 @@
     { "name": "system.router" },
     { "name": "system.fetch" },
     { "name": "system.shortcut" },
-    { "name": "system.prompt" }
+    { "name": "system.prompt" },
+    { "name": "system.webview" }
   ],
   "permissions": [{ "origin": "*" }],
   "config": {
@@ -23,6 +24,9 @@
         "component": "index"
       },
       "About": {
+        "component": "index"
+      },
+      "WebView": {
         "component": "index"
       }
     }
@@ -37,6 +41,9 @@
         "menu": false
       },
       "About": {
+        "menu": false
+      },
+      "WebView": {
         "menu": false
       }
     }

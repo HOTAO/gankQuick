@@ -5,20 +5,42 @@
         <text class="type-item">{{$item.name}}</text>
       </block>
     </div>
+    <div class="content-list">
+      <!-- <text>为什么什么什么东西都没有</text> -->
+      <list class="list">
+        <block for="{{contentInfo.list}}">
+          <list-item type="contentItem" class="content-item" @click="goWebView($item)">
+            <image class="item-img" src="{{$item.images[0]}}" if="$item.images" />
+            <image class="item-img" src="../Common/meizi.jpeg" else/>
+            <div class="item-row">
+              <text class="item-title">{{$item.desc}}</text>
+              <text class="item-info">类型：{{$item.source}} 作者：{{$item.who}}</text>
+            </div>
+            <!-- <div class="item-row">
+              <text>时间：{{new Date($item.publishedAt).toLocaleDateString()}}</text>
+              <text>作者：{{$item.who}}</text>
+            </div> -->
+          </list-item>
+        </block>
+      </list>
+    </div>
   </div>
 </template>
 <style lang="less" scoped>
 #other {
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
   .type-list {
     display: flex;
+    width: 100%;
     padding: 20px;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     border-style: solid;
     border-color: #000000;
     border-bottom-width: 1px;
-    height: 400px;
+    height: 500px;
   }
   .type-item {
     font-size: 24px;
@@ -28,6 +50,43 @@
     border-radius: 65px;
     text-align: center;
     background-color: #f55555;
+  }
+  .content-list {
+    width: 100%;
+    font-size: 16px;
+    height: 100%;
+    .list {
+      padding: 20px;
+    }
+    .content-item {
+      margin-bottom: 10px;
+      height: 140px;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom-width: 1px;
+      border-color: #666666;
+      border-style: solid;
+    }
+    .item-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      margin: 0 20px;
+    }
+    .item-row {
+      flex-direction: column;
+    }
+    .item-info {
+      font-size: 28px;
+      color: #999999;
+      margin-top: 10px;
+    }
+    .item-title {
+      text-overflow: ellipsis;
+      lines: 1;
+      font-size: 32px;
+      color: #333333;
+    }
   }
 }
 </style>
@@ -64,7 +123,46 @@ export default {
         name: '拓展资源',
         icon: ''
       }
-    ]
+    ],
+    contentInfo: {
+      list: [],
+      hasMore: true
+    },
+    type: 'all',
+    pageSize: 10,
+    page: 1
+  },
+  onInit() {
+    this.getList()
+    this.$page.setTitleBar({ text: '其他' })
+  },
+  getList() {
+    this.$app.$def.fetch.fetch({
+      url: `http://gank.io/api/data/${this.type}/${this.pageSize}/${this.page}`,
+      success: data => {
+        const results = JSON.parse(data.data).results
+        if (results.length <= 0) {
+          this.contentInfo.hasMore = false
+        } else {
+          this.contentInfo.list.push(...results)
+        }
+      },
+      fail: (error, code) => {
+        console.log('handling fail, error=' + error)
+        console.log('handling fail, code=' + code)
+      }
+    })
+  },
+  goWebView(itemInfo) {
+    console.log(itemInfo.desc)
+    console.log(itemInfo.url)
+    this.$app.$def.router.push({
+      uri: '/WebView',
+      params: {
+        title: itemInfo.desc,
+        url: itemInfo.url
+      }
+    })
   }
 }
 </script>

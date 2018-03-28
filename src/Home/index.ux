@@ -1,5 +1,5 @@
 <import name="meizi" src="../Meizi/index"></import>
-<import name="other" src="../other/index"></import>
+<import name="other" src="../Other/index"></import>
 
 <template>
   <div id="home">
