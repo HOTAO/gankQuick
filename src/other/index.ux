@@ -2,24 +2,22 @@
   <div id="other">
     <div class="type-list">
       <block for="{{typeList}}">
-        <text class="type-item">{{$item.name}}</text>
+        <div class="type-item" @click="getListByType($item.tab)">
+          <image class="type-img" src="../Common/{{$item.icon}}.png" />
+          <text class="type-text">{{$item.name}}</text>
+        </div>
       </block>
     </div>
     <div class="content-list">
-      <!-- <text>为什么什么什么东西都没有</text> -->
       <list class="list">
         <block for="{{contentInfo.list}}">
           <list-item type="contentItem" class="content-item" @click="goWebView($item)">
-            <image class="item-img" src="{{$item.images[0]}}" if="$item.images" />
-            <image class="item-img" src="../Common/meizi.jpeg" else/>
-            <div class="item-row">
-              <text class="item-title">{{$item.desc}}</text>
-              <text class="item-info">类型：{{$item.source}} 作者：{{$item.who}}</text>
+            <image class="item-img" src="../Common/meizi.jpeg" if="{{!$item.images}}" />
+            <image class="item-img" src="{{$item.images[0]}}" else/>
+            <div class="item-row ">
+              <text class="item-title ">{{$item.desc}}</text>
+              <text class="item-info ">类型：{{$item.type}} 作者：{{$item.who}}</text>
             </div>
-            <!-- <div class="item-row">
-              <text>时间：{{new Date($item.publishedAt).toLocaleDateString()}}</text>
-              <text>作者：{{$item.who}}</text>
-            </div> -->
           </list-item>
         </block>
       </list>
@@ -43,13 +41,18 @@
     height: 500px;
   }
   .type-item {
-    font-size: 24px;
-    width: 130px;
-    height: 130px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .type-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
     margin: 20px;
-    border-radius: 65px;
+  }
+  .type-text {
+    font-size: 16px;
     text-align: center;
-    background-color: #f55555;
   }
   .content-list {
     width: 100%;
@@ -97,31 +100,38 @@ export default {
     typeList: [
       {
         name: 'Android',
-        icon: ''
+        icon: 'android',
+        tab: 'Android'
       },
       {
         name: 'iOS',
-        icon: ''
+        icon: 'ios',
+        tab: 'iOS'
       },
       {
         name: '前端',
-        icon: ''
+        icon: 'fe',
+        tab: '前端'
       },
       {
         name: 'App',
-        icon: ''
+        icon: 'app',
+        tab: 'App'
       },
       {
         name: '休息视频',
-        icon: ''
+        icon: 'video',
+        tab: '休息视频'
       },
       {
         name: '瞎推荐',
-        icon: ''
+        icon: 'xiatuijian',
+        tab: '瞎推荐'
       },
       {
         name: '拓展资源',
-        icon: ''
+        icon: 'ziyuan',
+        tab: '拓展资源'
       }
     ],
     contentInfo: {
@@ -136,6 +146,12 @@ export default {
     this.getList()
     this.$page.setTitleBar({ text: '其他' })
   },
+  getListByType(name) {
+    console.log(name)
+    this.type = name
+    this.page = 1
+    this.getList()
+  },
   getList() {
     this.$app.$def.fetch.fetch({
       url: `http://gank.io/api/data/${this.type}/${this.pageSize}/${this.page}`,
@@ -144,6 +160,9 @@ export default {
         if (results.length <= 0) {
           this.contentInfo.hasMore = false
         } else {
+          if (this.page <= 1) {
+            this.contentInfo.list = []
+          }
           this.contentInfo.list.push(...results)
         }
       },
