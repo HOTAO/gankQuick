@@ -1,0 +1,53 @@
+<template>
+  <div id="Me">
+    <div class="avatar">
+      <image class="avatar-img" src="../Common/avatar.jpg" />
+      <text>HOTAO</text>
+      <div class="me-info">
+        <text>职业：前端攻城狮</text>
+        <text>工作时长：2年</text>
+        <text>在职城市：广州</text>
+        <text>兴趣爱好：篮球，打机，吹水</text>
+        <text>github：
+          <a href="https://github.com/HOTAO">https://github.com/HOTAO</a>
+        </text>
+        <text @click="changeTitle">掘金：正在编写中..😀</text>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  onInit() {
+    this.$page.setTitleBar({ text: 'about me' })
+  },
+  changeTitle() {
+    this.$page.setTitleBar({ text: 'about me' })
+  }
+}
+</script>
+
+<style lang="less" scoped>
+#Me {
+  .avatar {
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+  }
+  .me-info {
+    flex-direction: column;
+    width: 100%;
+    padding: 40px;
+    text {
+      margin-top: 10px;
+    }
+  }
+}
+</style>
+

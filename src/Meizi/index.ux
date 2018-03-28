@@ -103,7 +103,9 @@ export default {
     this.getMeiziList()
   },
   onReady() {},
-  onShow() {},
+  onShow() {
+    // this.$page.setTitleBar({ text: '妹子妹子~~' })
+  },
   onHide() {},
   onDestroy() {},
   onBackPress() {},
