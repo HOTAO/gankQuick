@@ -12,9 +12,8 @@
       <refresh @refresh="refreshList" refreshing="{{isRefreshing}}">
         <list class="list">
           <block for="{{contentInfo.list}}">
-            <list-item type="contentItem" class="content-item" @click="goWebView($item)">
-              <image class="item-img" src="{{$item.image}}" if="{{!!$item.image}}" />
-              <image class="item-img" src="../Common/meizi.jpeg" else/>
+            <list-item type="contentItemForImage" class="content-item" @click="goWebView($item)">
+              <image class="item-img" src="{{$item.images ? $item.images[0] : '../Common/meizi.jpeg'}}" />
               <div class="item-row ">
                 <text class="item-title ">{{$item.desc}}</text>
                 <text class="item-info ">类型：{{$item.type}} 作者：{{$item.who}}</text>
