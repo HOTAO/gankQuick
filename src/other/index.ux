@@ -2,7 +2,7 @@
   <div id="other">
     <div class="type-list">
       <block for="{{typeList}}">
-        <div class="type-item" @click="getListByType($item.tab)">
+        <div class="type-item {{$item.tab == type ? 'active': ''}}" @click="getListByType($item.tab)">
           <image class="type-img" src="../Common/{{$item.icon}}.png" />
           <text class="type-text">{{$item.name}}</text>
         </div>
@@ -13,8 +13,8 @@
         <list class="list">
           <block for="{{contentInfo.list}}">
             <list-item type="contentItem" class="content-item" @click="goWebView($item)">
-              <image class="item-img" src="../Common/meizi.jpeg" if="{{!$item.images}}" />
-              <image class="item-img" src="{{$item.images[0]}}" else/>
+              <image class="item-img" src="{{$item.image}}" if="{{!!$item.image}}" />
+              <image class="item-img" src="../Common/meizi.jpeg" else/>
               <div class="item-row ">
                 <text class="item-title ">{{$item.desc}}</text>
                 <text class="item-info ">类型：{{$item.type}} 作者：{{$item.who}}</text>
@@ -45,6 +45,10 @@
   .type-item {
     flex-direction: column;
     justify-content: center;
+  }
+  .active {
+    background-color: rgba(51, 154, 237, 0.15);
+    border-radius: 78px;
   }
   .type-img {
     width: 100px;
@@ -154,7 +158,6 @@ export default {
     this.getList()
   },
   getListByType(name) {
-    console.log(name)
     this.type = name
     this.page = 1
     this.getList()
@@ -169,10 +172,16 @@ export default {
           })
           this.isRefreshing = false
         }
+        // if(typeof data.data)
         const results = JSON.parse(data.data).results
         if (results.length <= 0) {
           this.contentInfo.hasMore = false
         } else {
+          results.map(item => {
+            if (item.images) {
+              item.image = item.images[0]
+            }
+          })
           if (this.page <= 1) {
             this.contentInfo.list = []
           }
