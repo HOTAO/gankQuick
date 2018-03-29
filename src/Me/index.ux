@@ -11,7 +11,9 @@
         <text>github：
           <a href="https://github.com/HOTAO">https://github.com/HOTAO</a>
         </text>
-        <text @click="changeTitle">掘金：正在编写中..😀</text>
+        <text @click="changeTitle">掘金：
+          <a href="https://juejin.im/post/5abb6732f265da23a2292a96">快应用之手摸手，跟我走（1）</a>
+        </text>
       </div>
     </div>
   </div>
@@ -46,6 +48,9 @@ export default {
     padding: 40px;
     text {
       margin-top: 10px;
+    }
+    a {
+      color: #0269c8;
     }
   }
 }
