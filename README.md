@@ -1,8 +1,7 @@
 快应用发布快两周啦。这两天有空，就捣鼓了一个快应用。整体感觉来说，交互很流畅，基本功能和组件都有。上手也很快。希望官网推广能做好。好了，话不多说，先上 gitHub [(传送门)](https://github.com/HOTAO/gankQuick)
 
-## gankQuick- 快应用（妹子篇）
+## gankQuick-快应用（妹子篇）
 
-
 [快应用官方文档](https://doc.quickapp.cn/)
 
 p 个 s: 环境搭建之类的 跟官网上面写的基本一样。照着做就行了。
@@ -61,17 +60,18 @@ npm run server
 npm run watch
 ```
 
- 手机上打开，打开 <font color="blue">快应用调试器</font>,扫码安装。安装成功是这样的 ↓
+手机上打开，打开 <font color="blue">快应用调试器</font>,扫码安装。安装成功是这样的 ↓
+
 ![](https://doc.quickapp.cn/readme.png)
 
 回到快应用调试器，点击 <font color="grey">开始调试</font> 按钮,手机和浏览器都会开始运行项目
 
 ##### 二、项目配置
 
- 官网写的贼详细，如果看不懂，可能要小心你的语文老师了，[ 项目配置传送门](https://doc.quickapp.cn/tutorial/getting-started/project-configuration.html)
+官网写的贼详细，如果看不懂，可能要小心你的语文老师了，[项目配置传送门](https://doc.quickapp.cn/tutorial/getting-started/project-configuration.html)
 这里贴出我的配置。可以跟着我的来写。
 
-1、修改 manifest.json 的  配置（默认的不够用，另外，还有包名，应用名，版本号等等需要修改或添加）
+1、修改 manifest.json 的 配置（默认的不够用，另外，还有包名，应用名，版本号等等需要修改或添加）
 
 ```
 {
@@ -120,7 +120,7 @@ npm run watch
 }
 ```
 
-上面的配置中： 配置了 router 路由。很简单，就只有一个路由 Home，后续会有更多路由。跟着来一步步走
+上面的配置中：配置了 router 路由。很简单，就只有一个路由 Home，后续会有更多路由。跟着来一步步走
 
 2、整理项目代码
 
@@ -239,4 +239,3 @@ OK 就先写到这里吧。后续在接上吧
 
 * tabs
 * webView
-  
