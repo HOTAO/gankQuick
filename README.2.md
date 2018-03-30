@@ -32,7 +32,7 @@ Home/index.ux
             <text if="currentIndex===1">其他<text>
           </div>
           <div class="tab-content-section">
-            <text if="currentIndex===2">其他<text>
+            <text if="currentIndex===2">about me<text>
           </div>
         </tab-content>
       </tabs>
@@ -117,7 +117,7 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
   <text if="currentIndex===1">其他<text>
 </div>
 <div class="tab-content-section">
-  <text if="currentIndex===2">其他<text>
+  <text if="currentIndex===2">about me<text>
 </div>
 ```
 
@@ -133,8 +133,8 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
 
 ```
 .flexible-tabs {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 ```
 
