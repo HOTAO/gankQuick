@@ -69,7 +69,6 @@ export default {
   },
   refreshList(evt) {
     this.isRefreshing = evt.refreshing
-    console.log('下拉刷新')
     this.getMeiziList()
   },
   getMeiziList() {
@@ -108,7 +107,6 @@ export default {
     }
   },
   loadMore() {
-    console.log('到底啦')
     this.page++
     this.getMeiziList()
   },

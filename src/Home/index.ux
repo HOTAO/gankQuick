@@ -39,11 +39,9 @@
     border-top-color: #eeeeee;
     .tab-item {
       display: flex;
-      flex-direction: column;
       padding: 20px;
       font-size: 12px;
-      // height: 80px;
-      align-items: center;
+      justify-content: center;
       flex: 1;
     }
     .tab-text {
