@@ -105,7 +105,9 @@ export default {
 </script>
 ```
 
-tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是为记录下标，好做样式和页面切换。 还有一个作用是下面这段代码中，在 if 里用作判断。 这样也是一种懒加载的方式
+tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是为记录下标，好做样式和页面切换。
+
+还有一个作用是下面这段代码中，在 if 里用作判断。 这样也是一种懒加载的方式
 
 ```
 <div class="tab-content-section">
@@ -137,7 +139,9 @@ flex-direction: column;
 ```
 
 这里的意思是：纵向从上往下排列.
+
 ![](https://user-gold-cdn.xitu.io/2018/3/30/16274e37d00beb61?w=956&h=724&f=jpeg&s=86527)
+
 我们的 DOM 结构是这样的：
 
 ```
