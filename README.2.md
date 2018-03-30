@@ -92,7 +92,7 @@ export default {
       }
     ]
   },
-  // 监听change事件，触发时动态修改tabs的index属性
+  // 监听change事件，触发时动态修改tabs的index属性
   // 左右滑动屏幕的时候就会需要用到这里
   changeTabactive(evt) {
     this.currentIndex = evt.index
