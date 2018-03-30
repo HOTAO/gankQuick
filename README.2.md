@@ -1,5 +1,11 @@
 OK，上一篇文章我们做了个妹子的页面[(传送门)](https://juejin.im/post/5abb6732f265da23a2292a96)
 
+## gankQuick-快应用（妹子篇）
+
+[快应用官方文档](https://doc.quickapp.cn/)
+
+感谢 gank.io 提供的 api
+
 今天接着上一次的文章，继续往下做：
 
 #### 1、先来做个 tabs 吧
