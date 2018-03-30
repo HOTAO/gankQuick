@@ -149,7 +149,7 @@ flex-direction: column;
 
 这句样式 `flex-direction: column` 会让里面的 `tabs` 和 `div` 垂直排列
 
-其实，快应用的 dispaly 默认  值就是 flex，所以，其实可以这么写
+其实，快应用的 dispaly 默认值就是 flex，所以，其实可以这么写
 
 ```
 .flexible-tabs {
@@ -157,7 +157,7 @@ flex-direction: column;
 }
 ```
 
-效果是一样的， 我写上只是为了方便阅读，你们可以不写的。
+效果是一样的，我写上只是为了方便阅读，你们可以不写的。
 
 上面写完，效果是这样的 ↓
 
