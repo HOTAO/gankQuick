@@ -32,7 +32,7 @@ Home/index.ux
             <text if="currentIndex===1">其他<text>
           </div>
           <div class="tab-content-section">
-            <text if="currentIndex===2">其他<text>
+            <text if="currentIndex===2">about me<text>
           </div>
         </tab-content>
       </tabs>
@@ -92,7 +92,7 @@ export default {
       }
     ]
   },
-  // 监听change事件，触发时动态修改tabs的index属性
+  // 监听change事件，触发时动态修改tabs的index属性
   // 左右滑动屏幕的时候就会需要用到这里
   changeTabactive(evt) {
     this.currentIndex = evt.index
@@ -105,7 +105,9 @@ export default {
 </script>
 ```
 
-tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是为记录下标，好做样式和页面切换。 还有一个作用是下面这段代码中，在 if 里用作判断。 这样也是一种懒加载的方式
+tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是为记录下标，好做样式和页面切换。
+
+还有一个作用是下面这段代码中，在 if 里用作判断。 这样也是一种懒加载的方式
 
 ```
 <div class="tab-content-section">
@@ -115,7 +117,7 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
   <text if="currentIndex===1">其他<text>
 </div>
 <div class="tab-content-section">
-  <text if="currentIndex===2">其他<text>
+  <text if="currentIndex===2">about me<text>
 </div>
 ```
 
@@ -131,13 +133,15 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
 
 ```
 .flexible-tabs {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 ```
 
 这里的意思是：纵向从上往下排列.
+
 ![](https://user-gold-cdn.xitu.io/2018/3/30/16274e37d00beb61?w=956&h=724&f=jpeg&s=86527)
+
 我们的 DOM 结构是这样的：
 
 ```
@@ -149,7 +153,7 @@ flex-direction: column;
 
 这句样式 `flex-direction: column` 会让里面的 `tabs` 和 `div` 垂直排列
 
-其实，快应用的 dispaly 默认  值就是 flex，所以，其实可以这么写
+其实，快应用的 dispaly 默认值就是 flex，所以，其实可以这么写
 
 ```
 .flexible-tabs {
@@ -157,7 +161,7 @@ flex-direction: column;
 }
 ```
 
-效果是一样的， 我写上只是为了方便阅读，你们可以不写的。
+效果是一样的，我写上只是为了方便阅读，你们可以不写的。
 
 上面写完，效果是这样的 ↓
 
