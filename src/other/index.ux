@@ -2,9 +2,9 @@
   <div id="other">
     <div class="type-list">
       <block for="{{typeList}}">
-        <div class="type-item {{$item.tab == type ? 'active': ''}}" @click="getListByType($item.tab)">
-          <image class="type-img" src="../Common/{{$item.icon}}.png" />
-          <text class="type-text">{{$item.name}}</text>
+        <div class="type-item" @click="getListByType($item.tab)">
+          <image class="type-img {{$item.tab == type ? 'active': ''}}" src="../Common/{{$item.icon}}.png" />
+          <text class="type-text {{$item.tab == type ? 'active-text': ''}}">{{$item.name}}</text>
         </div>
       </block>
     </div>
@@ -45,18 +45,21 @@
     flex-direction: column;
     justify-content: center;
   }
+  .type-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    padding: 20px;
+  }
   .active {
     background-color: rgba(51, 154, 237, 0.15);
-    border-radius: 78px;
+    border-radius: 70px;
   }
-  .type-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
-    margin: 20px;
+  .active-text {
+    color: rgb(51, 154, 237);
   }
   .type-text {
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
   }
   .content-list {
@@ -162,21 +165,19 @@ export default {
     this.getList()
   },
   getList() {
-    this.$app.$def.fetch.fetch({
-      url: `http://gank.io/api/data/${this.type}/${this.pageSize}/${this.page}`,
-      success: data => {
+    this.$app.$def.api
+      .getData(`${this.type}/${this.pageSize}/${this.page}`)
+      .then(response => {
         if (this.isRefreshing) {
           this.$app.$def.prompt.showToast({
             message: '刷新成功'
           })
           this.isRefreshing = false
         }
-        // if(typeof data.data)
-        const results = JSON.parse(data.data).results
-        if (results.length <= 0) {
+        if (response.results.length <= 0) {
           this.contentInfo.hasMore = false
         } else {
-          results.map(item => {
+          response.results.map(item => {
             if (item.images) {
               item.image = item.images[0]
             }
@@ -184,14 +185,20 @@ export default {
           if (this.page <= 1) {
             this.contentInfo.list = []
           }
-          this.contentInfo.list.push(...results)
+          this.contentInfo.list.push(...response.results)
         }
-      },
-      fail: (error, code) => {
-        console.log('handling fail, error=' + error)
-        console.log('handling fail, code=' + code)
-      }
-    })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    // this.$app.$def.fetch.fetch({
+    //   url: `http://gank.io/api/data/${this.type}/${this.pageSize}/${this.page}`,
+    //   success: data => {},
+    //   fail: (error, code) => {
+    //     console.log('handling fail, error=' + error)
+    //     console.log('handling fail, code=' + code)
+    //   }
+    // })
   },
   goWebView(itemInfo) {
     console.log(itemInfo.desc)

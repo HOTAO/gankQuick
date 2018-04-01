@@ -72,27 +72,24 @@ export default {
     this.getMeiziList()
   },
   getMeiziList() {
-    this.$app.$def.fetch.fetch({
-      url: `http://gank.io/api/data/福利/${this.pageSize}/${this.page}`,
-      success: data => {
+    this.$app.$def.api
+      .getData(`福利/${this.pageSize}/${this.page}`)
+      .then(response => {
         if (this.isRefreshing) {
           this.$app.$def.prompt.showToast({
             message: '刷新成功'
           })
           this.isRefreshing = false
         }
-        const results = JSON.parse(data.data).results
-        if (results.length <= 0) {
+        if (response.results.length <= 0) {
           this.meiziInfo.hasMore = false
         } else {
-          this.meiziInfo.list.push(...results)
+          this.meiziInfo.list.push(...response.results)
         }
-      },
-      fail: (error, code) => {
-        console.log('handling fail, error=' + error)
-        console.log('handling fail, code=' + code)
-      }
-    })
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   },
   shouModel(url) {
     this.model = {
