@@ -11,7 +11,8 @@
     { "name": "system.fetch" },
     { "name": "system.shortcut" },
     { "name": "system.prompt" },
-    { "name": "system.webview" }
+    { "name": "system.webview" },
+    { "name": "system.storage" }
   ],
   "permissions": [{ "origin": "*" }],
   "config": {

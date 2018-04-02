@@ -2,17 +2,28 @@
 /**
  * 应用级别的配置，供所有页面公用
  */
+// 脚本：regenerator.js
+// 全局引用
+const globalRef = global.__proto__ || global
+
+// global注入regeneratorRuntime
+globalRef.regeneratorRuntime = require('babel-runtime/regenerator')
+
 import util from './util'
 import fetch from '@system.fetch'
 import router from '@system.router'
 import prompt from '@system.prompt'
 import api from './api/api'
+import webview from '@system.webview'
+import storage from '@system.storage'
 
 export default {
   fetch,
   router,
   prompt,
   api,
+  webview,
+  storage,
   showMenu: util.showMenu,
   createShortcut: util.createShortcut,
   onCreate() {

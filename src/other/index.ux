@@ -201,8 +201,9 @@ export default {
     // })
   },
   goWebView(itemInfo) {
-    console.log(itemInfo.desc)
-    console.log(itemInfo.url)
+    // this.$app.$def.webview.loadUrl({
+    //   url: itemInfo.url
+    // })
     this.$app.$def.router.push({
       uri: '/WebView',
       params: {

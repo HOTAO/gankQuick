@@ -92,12 +92,31 @@ export default {
       })
   },
   shouModel(url) {
+    this.$app.$def.storage.set({
+      key: 'test',
+      value: url,
+      success: response => {
+        console.log(response)
+      },
+      fail: error => {
+        console.log(error)
+      }
+    })
     this.model = {
       show: true,
       url
     }
   },
   closeModel() {
+    this.$app.$def.storage.get({
+      key: 'test',
+      success: data => {
+        console.log('handling success', data)
+      },
+      fail: (data, code) => {
+        console.log('handling fail, code=' + code)
+      }
+    })
     this.model = {
       show: false,
       url: ''

@@ -1,5 +1,6 @@
 import Fly from 'flyio/dist/npm/hap'
 import fetch from '@system.fetch'
+import storage from '@system.storage'
 
 const fly = new Fly(fetch)
 
@@ -8,9 +9,17 @@ fly.config.baseURL = 'http://gank.io/api'
 //添加请求拦截器
 fly.interceptors.request.use(request => {
   //给所有请求添加自定义header
-  request.headers['X-Tag'] = 'flyio'
+  storage.get({
+    key: 'test',
+    success: async data => {
+      request.headers['X-Tag'] = await data
+    },
+    fail: (data, code) => {
+      console.log('handling fail, code=' + code)
+    }
+  })
   //打印出请求体
-  console.log(request.body)
+  console.log('request.body', request.body)
   //终止请求
   //var err=new Error("xxx")
   //err.request=request
