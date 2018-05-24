@@ -301,8 +301,3 @@ export default {
 好今天先到这.完整项目地址在 [这里](https://github.com/HOTAO/gankQuick)
 
 可以点一下 start，感恩的 ❤️
-
-下期精彩预告：
-
-* list
-* web
