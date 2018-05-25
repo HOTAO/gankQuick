@@ -17,7 +17,7 @@ OK，上一篇文章我们做了个妹子的页面[(传送门)](https://juejin.i
 
 Home/index.ux
 
-```
+```js
 <import name="meizi" src="../Meizi/index"></import>
 
 <template>
@@ -109,7 +109,7 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
 
 还有一个作用是下面这段代码中，在 if 里用作判断。 这样也是一种懒加载的方式
 
-```
+```js
 <div class="tab-content-section">
   <meizi if="currentIndex===0"></meizi>
 </div>
@@ -171,7 +171,7 @@ tabs 搞定, 这里有 changeTabactive 和 clickTabBar 两个函数，不只是�
 
 Meizi/index.ux
 
-```
+```js
 <template>
   <div id="Meizi">
     <refresh @refresh="refreshList" refreshing="{{isRefreshing}}">
@@ -300,4 +300,4 @@ export default {
 
 好今天先到这.完整项目地址在 [这里](https://github.com/HOTAO/gankQuick)
 
-可以点一下 start，感恩的 ❤️
+*可以点一下 start，感恩的 ❤️*
